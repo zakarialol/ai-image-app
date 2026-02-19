@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .imgparamiter{
+        @apply w-full text-xs bg-firstClr cursor-pointer text-white rounded-md relative
+    }
+    .outline-hover{
+        @apply hover:outline hover:outline-secondClr;
+    }
+}
+@layer utilities{
+    .activeNone{
+        height: 0px !important;
+    }
+}
