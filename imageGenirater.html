@@ -32,7 +32,7 @@
         </header>
         <!-- form styling -->
             <div class="relative w-full h-24 mb-4 overflow-hidden rounded-lg">
-                <textarea name="" data-inputArea='inputArea' id="" class="w-full h-full p-2 overflow-y-auto text-lg text-white text-xs outline-none resize-none bg-firstClr [&::-webkit-scrollbar]:w-[4px]
+                <textarea name="" data-inputArea='inputArea' class="w-full h-full p-2 overflow-y-auto text-lg text-white text-xs outline-none resize-none bg-firstClr [&::-webkit-scrollbar]:w-[4px]
                 [&::-webkit-scrollbar-thumb]:bg-white/40
                 [&::-webkit-scrollbar-thumb]:rounded-full
                 [&::-webkit-scrollbar-track]:bg-transparent"></textarea>
@@ -91,14 +91,13 @@
                 <!-- genirate button -->
                 <button class="content-center w-full p-2 font-sans font-bold text-center text-white capitalize rounded-md bg-secondClr spac">
                             <!-- svg place -->
-                            <p>genirate</p>
+                            <p data-Btn="genirateBtn">genirate</p>
                 </button>
 
         </div>
-
           <!-- image holder -->
-          <div>
-            
+          <div data-imgHolder="imgHolder" class="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] mt-4 gap-4">
+                
           </div>
     </main>
     <script type="module" src="main.js"></script>
