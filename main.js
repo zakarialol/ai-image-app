@@ -5,10 +5,14 @@ const imgMdlTitle = document.querySelector("[data-title='ModalTitle']")
 const imgCountTitle = document.querySelector("[data-title='count-title']")
 const asptRatioTitle = document.querySelector("[data-title='aspectratio-title']")
 const genirateBtn = document.querySelector("[data-Btn='genirateBtn']")
-// export let imageSettingArr = []
-import { randomQuotefunc , genirateFunc , genirateWidthAndHeight} from "./ui.js"
-import { imageSettingArr } from "./state.js"
-import { ImageParameter } from "./state.js"
+const modalSvgsBtns = document.querySelectorAll("[data-btn='modal-svgs'] svg")
+const countSvgsBtns = document.querySelectorAll("[data-btn='count-svgs'] svg")
+const aspectSvgsBtns = document.querySelectorAll("[data-btn='aspect-svgs'] svg")
+console.log(modalSvgsBtns)
+console.log(countSvgsBtns)
+console.log(aspectSvgsBtns)
+import { ImageParameter,imageSettingArr } from "./state.js"
+import { randomQuotefunc , genirateFunc , genirateWidthAndHeight ,checkParametersFunc,toggleHiddenSvgsFunc} from "./ui.js"
 import { generate } from "./api.js"
 import "./api.js"
 // adding event listenre
@@ -24,14 +28,17 @@ imgsSettingDiv.addEventListener('click',(event)=>{
   const currentP = event.target.closest('p')
   if(currentDiv.dataset.imgtype === 'imgType'){
     currentDiv?.nextElementSibling.classList.toggle('activeNone')
+    toggleHiddenSvgsFunc(modalSvgsBtns)
     return
   }
   if(currentDiv.dataset.imgnbr === 'imgNbr'){
     currentDiv?.nextElementSibling.classList.toggle('activeNone')
+    toggleHiddenSvgsFunc(countSvgsBtns)
     return
   }
   if(currentDiv.dataset.landscape === 'landScape'){
     currentDiv?.nextElementSibling.classList.toggle('activeNone')
+    toggleHiddenSvgsFunc(aspectSvgsBtns)
     return
   }
   //this for the content inside 
@@ -41,6 +48,7 @@ imgsSettingDiv.addEventListener('click',(event)=>{
     imageSettingArr[0] = currentP.dataset.paramiter.trim()
     ImageParameter.model = currentP.dataset.paramiter.trim()
     event.target.closest('div').classList.add('activeNone')
+    toggleHiddenSvgsFunc(modalSvgsBtns)
     console.log(ImageParameter,'the array i will need')
     return
   }
@@ -50,6 +58,7 @@ imgsSettingDiv.addEventListener('click',(event)=>{
     imageSettingArr[1] = currentP.textContent.trim()
     ImageParameter.count =Number(currentP.textContent.trim().slice(0,1)) 
     event.target.closest('div').classList.add('activeNone')
+    toggleHiddenSvgsFunc(countSvgsBtns)
     console.log(ImageParameter,'the array i will need')
     return
   }
@@ -62,14 +71,18 @@ imgsSettingDiv.addEventListener('click',(event)=>{
     ImageParameter.height =Number(imgObj.height) 
     ImageParameter.width = Number(imgObj.width) 
     event.target.closest('div').classList.add('activeNone')
+    toggleHiddenSvgsFunc(aspectSvgsBtns)
     console.log(ImageParameter,'image paramerter')    
     return
   }
 })
 // working on the genirate btn 
 genirateBtn.addEventListener('click',()=>{
-  genirateFunc()
-  console.log("genirating ...")
-  generate()
+  if(checkParametersFunc()){
+    console.log("message is true")
+  }else{
+    console.log('genirating ...')
+    genirateFunc()
+    generate()
+  }
 })
-// "eyJlcnJvcnMiOlt7Im1lc3NhZ2UiOiJBaUVycm9yOiBCYWQgaW5wdXQ6IEVycm9yOiByZXF1aXJlZCBwcm9wZXJ0aWVzIGF0ICcvJyBhcmUgJ211bHRpcGFydCcgKGYyY2RiYjhjLTJhODMtNDgzMC04MGQ1LWM3YTQ3MDE2MmJjZSkiLCJjb2RlIjo1MDA2fV0sInN1Y2Nlc3MiOmZhbHNlLCJyZXN1bHQiOnt9LCJtZXNzYWdlcyI6W119"

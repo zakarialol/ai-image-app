@@ -2,12 +2,12 @@ const textArea = document.querySelector("[data-inputArea='inputArea']")
 let imgModel = document.querySelector("[data-img-type ='image-type']")
 const imgCount = document.querySelector("[data-img-nbr ='image-nbr']")
 const imgAspectRatio = document.querySelector("[data-landscape ='landscape']")
-const test = document.querySelector("[data-img-type ='image-type']")
-const imgHolderDiv = document.querySelector("[data-imgHolder='imgHolder']")
+export const imgHolderDiv = document.querySelector("[data-imgHolder='imgHolder']")
+const errMessage = document.querySelector("[data-err='error message']")
 //exportin functions
-export {randomQuotefunc ,genirateFunc ,genirateWidthAndHeight}
+export {randomQuotefunc ,genirateFunc ,genirateWidthAndHeight , checkParametersFunc ,toggleHiddenSvgsFunc}
 //
-import { imageSettingArr } from "./state.js";
+import { ImageParameter, imageSettingArr } from "./state.js";
 const quoteArray = ["A futuristic cyberpunk city at night, neon lights reflecting on wet streets, flying cars, ultra-detailed, cinematic lighting, 4K, wide angle, realistic style","Minimalist programmer workspace, laptop with code on screen, soft ambient lighting, coffee cup, modern desk, clean aesthetic, shallow depth of field","Anime-style portrait of a young man with messy black hair, glowing eyes, soft pastel background, detailed shading, high quality illustration","Epic fantasy landscape with floating islands, waterfalls in the sky, golden sunset, dramatic clouds, ultra-detailed, magical atmosphere","Modern product mockup of wireless earbuds on a dark background, studio lighting, soft shadows, realistic reflections, high-end commercial photography","Humanoid AI robot with transparent face showing glowing circuits, futuristic design, realistic materials, cinematic lighting, ultra sharp focus","Street photography of a busy city market, candid people, natural light, motion blur, realistic colors, documentary style","Minimal logo design for a tech startup, abstract geometric symbol, flat design, black and white, clean and modern branding","Portrait of a woman surrounded by floating light particles, dreamy atmosphere, soft glow, bokeh background, artistic photography style","Dark aesthetic wallpaper with moon, clouds, and subtle stars, moody lighting, cinematic feel, high contrast, 4K resolution"]
 //
  let index = 0;
@@ -48,15 +48,9 @@ function typingSmoth(text){
 // this function for image modal ****
 function imageModelFunc(){
     const models = [{name:"select model",dataName:'title'},
-        {name:"flux-2-klein-9b",parametre:"@cf/black-forest-labs/flux-2-klein-9b",dataName:'forImgModel'},
-        {name:"flux-2-klein-4b",parametre:"@cf/black-forest-labs/flux-2-klein-4b",dataName:'forImgModel'},
-        {name:'flux-2-dev',parametre:"@cf/black-forest-labs/flux-2-dev",dataName:'forImgModel'},
-        {name:"flux-1-schnell",parametre:"@cf/black-forest-labs/flux-1-schnell",dataName:'forImgModel'},{name:"stable-diffusion-xl-lightning",parametre:"@cf/bytedance/stable-diffusion-xl-lightning",dataName:"forImgModel"},
+        {name:"stable-diffusion-xl-lightning",parametre:"@cf/bytedance/stable-diffusion-xl-lightning",dataName:"forImgModel"},
         {name:"dreamshaper-8-lcm",parametre:"@cf/lykon/dreamshaper-8-lcm",dataName:'forImgModel'},
-        {name:"stable-diffusion-v1-5-inpainting",parametre:"@cf/runwayml/stable-diffusion-v1-5-inpainting",dataName:'forImgModel'},
         {name:"stable-diffusion-xl-base-1.0",parametre:"@cf/stabilityai/stable-diffusion-xl-base-1.0",dataName:'forImgModel'},
-        {name:"stable-diffusion-v1-5-img2img",parametre:"@cf/runwayml/stable-diffusion-v1-5-img2img",dataName:'forImgModel'}
-
         ]
     const html = HtmlFunc(models);
     imgModel.appendChild(html)
@@ -97,7 +91,7 @@ function HtmlFunc(arr){
         divSettingHolder.innerHTML += p
             return
         }
-        let p = `<p  class="p-2 hover:bg-secondClr text-white capitalize text-xs" data-paramiter = ${element.parametre} data-mode='${element.dataName}'>${element.name}</p>`
+        let p = `<p  class="p-2 hover:bg-secondClr text-white capitalize text-xs cursor-pointer" data-paramiter = ${element.parametre} data-mode='${element.dataName}'>${element.name}</p>`
         divSettingHolder.innerHTML += p
     });
     return divSettingHolder
@@ -105,9 +99,10 @@ function HtmlFunc(arr){
 // function for genirate button
 function genirateFunc(){
     let numberOfImg = Number(imageSettingArr[1]?.slice(0,1))
+    if (!numberOfImg) numberOfImg = 1;
+    console.log(numberOfImg,"number of img")
     let genratedHtml = geniaretHtmlForimgFunc(numberOfImg)
     imgHolderDiv.innerHTML = genratedHtml
-
 }
 //genirate divs for imgs
 function geniaretHtmlForimgFunc(imgcount){
@@ -129,13 +124,17 @@ function geniaretHtmlForimgFunc(imgcount){
 // function to genirate aspect ratio
 function GetaspectRatioFunc(aspectChosen){
     if(aspectChosen?.toLowerCase()==='square (1:1)'){
+        ImageParameter.aspectR = "aspect-square"
+        console.log(ImageParameter,"imageparameter")
        return 'aspect-square'
     }else if(aspectChosen?.toLowerCase()==='landscape (16:9)'){
+        ImageParameter.aspectR = "aspect-video"
+        console.log(ImageParameter,"imageparameter")
         return 'aspect-video'
     }else if (aspectChosen?.toLowerCase()==='portrait'){
+        ImageParameter.aspectR = "aspect-[5/6]"
+        console.log(ImageParameter,"imageparameter")
         return 'aspect-[5/6]'
-    }else{
-        return 'aspect-square'
     }
 }
 // function that will return the with and height for the image
@@ -156,6 +155,44 @@ function genirateWidthAndHeight(aspectR){
        ObjStoresHeightAndWidthForImg.height = "1024"
        return ObjStoresHeightAndWidthForImg
     }
+}
+// hundling the erro if one of the parametre an't including
+function checkParametersFunc(){
+    console.log("hello am inside the checkFunc")
+    let errMsg = ""
+    console.log(errMsg,"errmsg")
+    if(!textArea.value || textArea.value.length < 5){
+        errMsg = "please right valid propmt"
+        errorMsgFunc(errMsg)
+        return true
+    }
+    if(!ImageParameter.model){
+        errMsg = "select model"
+        errorMsgFunc(errMsg)
+        return true
+    }
+    if(!ImageParameter.height){
+        errMsg = "select aspect Ratio"
+        errorMsgFunc(errMsg)
+        return true
+    }
+    if(!ImageParameter.width){
+        errMsg = "select aspect ratio"
+        errorMsgFunc(errMsg)
+        return true
+    }
+    console.log(errMsg,"errMsg")
+}
+// error message display
+function errorMsgFunc(msg){
+    errMessage.textContent = msg
+}
+// toggle hidden from the svgs 
+function toggleHiddenSvgsFunc(svgsBtns){
+    console.log('we are entring the toggle hidden svgs ')
+    svgsBtns.forEach(btn=>{
+        btn.classList.toggle("hidden")
+    })
 }
 
 
