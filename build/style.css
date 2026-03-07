@@ -645,11 +645,6 @@ video {
   aspect-ratio: 16 / 9;
 }
 
-.size-6 {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
 .h-24 {
   height: 6rem;
 }
