@@ -9,7 +9,9 @@ const modalSvgsBtns = document.querySelectorAll("[data-btn='modal-svgs'] svg")
 const countSvgsBtns = document.querySelectorAll("[data-btn='count-svgs'] svg")
 const aspectSvgsBtns = document.querySelectorAll("[data-btn='aspect-svgs'] svg")
 const themeButton = document.querySelector("[data-btn='theme-mode']")
-const themModeSvg = document.querySelectorAll("[data-btn='theme-mode'] svg")
+const themModeSvg = document.querySelectorAll("[data-div='svg-div']")
+// const darkBtn = document.getElementById('darkmode')
+// console.log(themModeSvg)
 // console.log(themMode)
 import { ImageParameter,imageSettingArr } from "./state.js"
 import { randomQuotefunc , genirateFunc , genirateWidthAndHeight ,checkParametersFunc,toggleHiddenSvgsFunc} from "./ui.js"
@@ -87,7 +89,8 @@ genirateBtn.addEventListener('click',()=>{
   }
 })
 // this for them mode 
-
 themeButton.addEventListener("click",()=>{
+    console.log('you just clicked change them')
+    document.documentElement.classList.toggle('dark')
     toggleHiddenSvgsFunc(themModeSvg)
 })
