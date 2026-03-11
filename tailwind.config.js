@@ -11,17 +11,17 @@ module.exports = {
         fourthClr:'#A33B20'// for bady background color
       },
       keyframes:{
-        test:{
+        skeltonAnimation:{
           "0%,100%":{
-            backgroundColor: 'gray'
+            opacity:.5
           },
           "50%":{
-            backgroundColor:'white'
+            opacity:.1
           }
         }
       },
       animation:{
-          test:'test 1s ease infinite'
+          skelton:'skeltonAnimation 1s ease infinite'
       }
       
     },

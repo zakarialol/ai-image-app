@@ -1,29 +1,41 @@
 import { ImageParameter } from "./state.js";
-import { imgHolderDiv } from "./ui.js";
+import { imgHolderDiv,textArea,errorMsgFunc,genirateFunc } from "./ui.js";
+import { genirateBtn } from "./main.js";
 export async function generate() {
-  const res = await fetch("http://localhost:3000/generate-image", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      prompt: "superpank",
-      model:ImageParameter.model.trim(),
-      count : ImageParameter.count,
-      width: ImageParameter.width,
-      height: ImageParameter.height,
-    })
-  });
-  const data = await res.json()
-  console.log(data,"result return from the server")
-  // functio to create the elements 
-  genirateHtmlForImgsFunc(data)
+  genirateBtn.disabled = true
+  try{
+    const res = await fetch("http://localhost:3000/generate-image", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prompt:textArea.value,
+        model:ImageParameter.model.trim(),
+        count : ImageParameter.count,
+        width: ImageParameter.width,
+        height: ImageParameter.height,
+      })
+    });0
+    if(!res.ok){
+      errorMsgFunc("something went wrong please try again")
+      // imgHolderDiv.textContent = " "
+      throw new Error("something went wrong please try again")
+    }
+    genirateFunc()
+    const data = await res.json()
+    genirateHtmlForImgsFunc(data)
+  }catch(err){
+    console.log(err)
+  }finally{
+    genirateBtn.disabled = false
+  }
+  // function to create the elements 
 }
 //function to genirate html for imgs 
-
 function genirateHtmlForImgsFunc(data){
   // let imgsDiv = document.createElement('div')
   let html = ""
   data.images.forEach(base64img =>{
-    html += `<div class= "relative ${ImageParameter.aspectR}">
+    html += `<div class= "relative ${ImageParameter.aspectR} max-w-[300px]">
                 <img class = "w-full h-full" src="data:image/png;base64,${base64img}">
                 <a class ="absolute right-1 bottom-1 text-white" href="data:image/png;base64,${base64img}" download = "image.png">
                     <svg class = "w-[22px] h-[22px] p-[2px] bg-firstClr rounded-md" viewBox="0 0 24 24" stroke="currentColor"  fill="none" xmlns="http://www.w3.org/2000/svg" >
@@ -33,8 +45,5 @@ function genirateHtmlForImgsFunc(data){
                 </a>
             </div>`
   })
-  console.log(html,'this the result of the html *****####***')
-  // imgsDiv.insertAdjacentHTML('afterbegin',html)
-  // imgHolderDiv.textContent = ""
   imgHolderDiv.innerHTML = html
 }

@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="./build/style.css">
     <title>image genirater</title>
 </head>
-<body class="content-center bg-black dark:bg-white">
-    <main class="h-screen p-2 mx-1 bg-white border-t-8 rounded-t-2xl border-t-secondClr dark:bg-black">
+<body class="content-center bg-black dark:bg-white min-h-dvh">
+    <main class="p-2 mx-1 bg-white border-t-8 min-h-dvh rounded-t-2xl border-t-secondClr dark:bg-black md:min-h-[400px] md:w-9/12 mx-auto md:rounded-b-2xl lg:w-[800px] pb-2">
         <!-- header only style -->
         <header class="flex items-center justify-between gap-2 mb-8">
             <!-- first part -->
@@ -49,7 +49,7 @@
             </button>
         </header>
         <!-- form styling -->
-            <div class="relative w-full h-24 mb-4 overflow-hidden rounded-lg">
+            <div class="relative w-full h-24 overflow-hidden rounded-lg">
                 <textarea name="" data-inputArea='inputArea' class="w-full h-full p-2 overflow-y-auto text-lg text-white text-xs outline-none resize-none bg-firstClr dark:bg-white dark:text-firstClr [&::-webkit-scrollbar]:w-[4px]
                 [&::-webkit-scrollbar-thumb]:bg-white/40
                 [&::-webkit-scrollbar-thumb]:rounded-full
@@ -72,13 +72,13 @@
                  </button>
             </div>
         <!-- this part about the error message  -->
-         <div class="dark:text-white">
-            <p data-err="error message"></p>
+         <div data-err="div-err-holder" class="text-red-500 text-[9px] md: tracking-[1px] overflow-hidden h-0 transition-all duration-500 md:text-sm">
+            <p data-err="error-message"></p>
          </div>
         <!-- div for image paramerter and genirate button -->
          <div data-img-stting = "img-settings" class="flex flex-col gap-4">
                 <!-- image type  -->
-                 <div data-img-type ='image-type'>
+                 <div data-img-type ='image-type' class="mt-4">
                         <div data-imgType="imgType" class="p-2 imgparamiter outline-hover dark:text-firstClr dark:bg-white">
                             <p data-title="ModalTitle">select model</p>
                             <button data-btn="modal-svgs" class="absolute w-4 -translate-y-1/2 right-2 top-1/2">
@@ -120,14 +120,14 @@
                     </div>
                 </div>
                 <!-- genirate button -->
-                <button class="content-center w-full font-sans font-bold text-center text-white capitalize rounded-md bg-secondClr spac">
+                <button data-Btn="genirateBtn" class="content-center w-full font-sans font-bold text-center text-white capitalize rounded-md bg-secondClr spac">
                             <!-- svg place -->
                             <p class="p-2 text-black dark:text-white" data-Btn="genirateBtn">genirate</p>
                 </button>
 
         </div>
           <!-- image holder -->
-          <div data-imgHolder="imgHolder" class="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] mt-4 gap-4">
+          <div data-imgHolder="imgHolder" class="grid grid-cols-[repeat(auto-fit,minmax(180px,max-content))] mt-4 gap-4">
                 
           </div>
     </main>

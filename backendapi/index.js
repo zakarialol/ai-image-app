@@ -11,7 +11,12 @@ app.post("/generate-image", async (req, res) => {
   console.log('we have get info from the front end****************************************************************************************************************************')
   try {
     const { prompt , width, height, count = 1, model} = req.body;
-    if (!prompt || prompt.trim().length < 5 || !width || !height || !count || model) {
+    console.log(prompt,"propmt")
+    console.log(width,"width")
+    console.log(height,"height")
+    console.log(count,"count")
+    console.log(model,"model")
+    if (!prompt || prompt.trim().length < 5 || !width || !height || !count || !model) {
       return res.status(400).json({ error: "missing requird properties" });
     }
     const images = await Promise.all(Array.from({length:count},async(_,i)=>{

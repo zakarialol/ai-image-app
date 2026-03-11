@@ -4,17 +4,14 @@ const imgsSettingDiv = document.querySelector('[data-img-stting = "img-settings"
 const imgMdlTitle = document.querySelector("[data-title='ModalTitle']")
 const imgCountTitle = document.querySelector("[data-title='count-title']")
 const asptRatioTitle = document.querySelector("[data-title='aspectratio-title']")
-const genirateBtn = document.querySelector("[data-Btn='genirateBtn']")
+export const genirateBtn = document.querySelector("[data-Btn='genirateBtn']")
 const modalSvgsBtns = document.querySelectorAll("[data-btn='modal-svgs'] svg")
 const countSvgsBtns = document.querySelectorAll("[data-btn='count-svgs'] svg")
 const aspectSvgsBtns = document.querySelectorAll("[data-btn='aspect-svgs'] svg")
 const themeButton = document.querySelector("[data-btn='theme-mode']")
 const themModeSvg = document.querySelectorAll("[data-div='svg-div']")
-// const darkBtn = document.getElementById('darkmode')
-// console.log(themModeSvg)
-// console.log(themMode)
 import { ImageParameter,imageSettingArr } from "./state.js"
-import { randomQuotefunc , genirateFunc , genirateWidthAndHeight ,checkParametersFunc,toggleHiddenSvgsFunc} from "./ui.js"
+import { randomQuotefunc , genirateFunc , genirateWidthAndHeight ,checkParametersFunc,toggleHiddenSvgsFunc, errorMsgFunc} from "./ui.js"
 import { generate } from "./api.js"
 import "./api.js"
 // adding event listenre
@@ -51,7 +48,6 @@ imgsSettingDiv.addEventListener('click',(event)=>{
     ImageParameter.model = currentP.dataset.paramiter.trim()
     event.target.closest('div').classList.add('activeNone')
     toggleHiddenSvgsFunc(modalSvgsBtns)
-    console.log(ImageParameter,'the array i will need')
     return
   }
   // for img count
@@ -61,7 +57,6 @@ imgsSettingDiv.addEventListener('click',(event)=>{
     ImageParameter.count =Number(currentP.textContent.trim().slice(0,1)) 
     event.target.closest('div').classList.add('activeNone')
     toggleHiddenSvgsFunc(countSvgsBtns)
-    console.log(ImageParameter,'the array i will need')
     return
   }
   // for aspt ratio
@@ -70,27 +65,33 @@ imgsSettingDiv.addEventListener('click',(event)=>{
     imageSettingArr[2] = currentP.textContent.trim()
     // this for image height and widgh
     const imgObj = genirateWidthAndHeight(currentP.textContent.trim())
-    ImageParameter.height =Number(imgObj.height) 
+    ImageParameter.height = Number(imgObj.height) 
     ImageParameter.width = Number(imgObj.width) 
     event.target.closest('div').classList.add('activeNone')
     toggleHiddenSvgsFunc(aspectSvgsBtns)
-    console.log(ImageParameter,'image paramerter')    
     return
   }
 })
 // working on the genirate btn 
 genirateBtn.addEventListener('click',()=>{
+  if(!navigator.onLine){
+    errorMsgFunc('please check the internet')
+    return
+  }
   if(checkParametersFunc()){
-    console.log("message is true")
+    return;
   }else{
-    console.log('genirating ...')
-    genirateFunc()
     generate()
   }
 })
 // this for them mode 
 themeButton.addEventListener("click",()=>{
-    console.log('you just clicked change them')
     document.documentElement.classList.toggle('dark')
     toggleHiddenSvgsFunc(themModeSvg)
 })
+// ching if the internet exist or no 
+window.onload = ()=>{
+  if(!navigator.onLine){
+    errorMsgFunc('please check the internet')
+  }
+}

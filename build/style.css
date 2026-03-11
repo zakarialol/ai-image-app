@@ -613,8 +613,9 @@ video {
   margin-right: 0.25rem;
 }
 
-.mb-4 {
-  margin-bottom: 1rem;
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mb-8 {
@@ -653,6 +654,10 @@ video {
   aspect-ratio: 16 / 9;
 }
 
+.h-0 {
+  height: 0px;
+}
+
 .h-24 {
   height: 6rem;
 }
@@ -665,8 +670,8 @@ video {
   height: 100%;
 }
 
-.h-screen {
-  height: 100vh;
+.min-h-dvh {
+  min-height: 100dvh;
 }
 
 .w-10 {
@@ -693,6 +698,10 @@ video {
   width: 100%;
 }
 
+.max-w-\[300px\] {
+  max-width: 300px;
+}
+
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -702,18 +711,18 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-@keyframes test {
+@keyframes skeltonAnimation {
   0%,100% {
-    background-color: gray;
+    opacity: 0.5;
   }
 
   50% {
-    background-color: white;
+    opacity: 0.1;
   }
 }
 
-.animate-test {
-  animation: test 1s ease infinite;
+.animate-skelton {
+  animation: skeltonAnimation 1s ease infinite;
 }
 
 .cursor-pointer {
@@ -724,8 +733,8 @@ video {
   resize: none;
 }
 
-.grid-cols-\[repeat\(auto-fit\2c minmax\(180px\2c 1fr\)\)\] {
-  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+.grid-cols-\[repeat\(auto-fit\2c minmax\(180px\2c max-content\)\)\] {
+  grid-template-columns: repeat(auto-fit,minmax(180px,max-content));
 }
 
 .flex-col {
@@ -800,6 +809,11 @@ video {
   border-top-color: rgb(54 143 139 / var(--tw-border-opacity, 1));
 }
 
+.bg-\[\#e0e0e0\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(224 224 224 / var(--tw-bg-opacity, 1));
+}
+
 .bg-black {
   --tw-bg-opacity: 1;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
@@ -825,6 +839,11 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
+.bg-gray-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(156 163 175 / var(--tw-bg-opacity, 1));
+}
+
 .p-1 {
   padding: 0.25rem;
 }
@@ -835,6 +854,10 @@ video {
 
 .p-\[2px\] {
   padding: 2px;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
 }
 
 .pl-px {
@@ -875,19 +898,24 @@ video {
   letter-spacing: 1px;
 }
 
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+}
+
 .text-firstClr {
   --tw-text-opacity: 1;
   color: rgb(49 57 60 / var(--tw-text-opacity, 1));
 }
 
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
 .outline-none {
@@ -939,9 +967,19 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
 
-.dark\:text-white:is(.dark *) {
+.dark\:bg-gray-200:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
+}
+
+.dark\:bg-gray-700:is(.dark *) {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
+}
+
+.dark\:text-black:is(.dark *) {
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
 .dark\:text-firstClr:is(.dark *) {
@@ -949,9 +987,35 @@ video {
   color: rgb(49 57 60 / var(--tw-text-opacity, 1));
 }
 
-.dark\:text-black:is(.dark *) {
+.dark\:text-white:is(.dark *) {
   --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+@media (min-width: 768px) {
+  .md\:min-h-\[400px\] {
+    min-height: 400px;
+  }
+
+  .md\:w-9\/12 {
+    width: 75%;
+  }
+
+  .md\:rounded-b-2xl {
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+  }
+
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:w-\[800px\] {
+    width: 800px;
+  }
 }
 
 .\[\&\:\:-webkit-scrollbar-thumb\]\:rounded-full::-webkit-scrollbar-thumb {
