@@ -157,6 +157,8 @@ function genirateWidthAndHeight(aspectR){
 }
 // hundling the erro if one of the parametre an't including
 function checkParametersFunc(){
+    let errMsg = ""
+    if(textArea.value.trim().length < 5){
         errMsg = "please right valid propmt"
         errorMsgFunc(errMsg)
         return true
@@ -176,6 +178,7 @@ function checkParametersFunc(){
         errorMsgFunc(errMsg)
         return true
     }
+}
 // error message display
 function errorMsgFunc(msg){
     errMessage.textContent = msg
@@ -189,28 +192,3 @@ function toggleHiddenSvgsFunc(svgsBtns){
         btn.classList.toggle("hidden")
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -11,7 +11,7 @@ const aspectSvgsBtns = document.querySelectorAll("[data-btn='aspect-svgs'] svg")
 const themeButton = document.querySelector("[data-btn='theme-mode']")
 const themModeSvg = document.querySelectorAll("[data-div='svg-div']")
 import { ImageParameter,imageSettingArr } from "./state.js"
-import { randomQuotefunc , genirateFunc , genirateWidthAndHeight ,checkParametersFunc,toggleHiddenSvgsFunc, errorMsgFunc} from "./ui.js"
+import { randomQuotefunc , genirateWidthAndHeight ,checkParametersFunc,toggleHiddenSvgsFunc, errorMsgFunc} from "./ui.js"
 import { generate } from "./api.js"
 import "./api.js"
 // adding event listenre
@@ -74,12 +74,14 @@ imgsSettingDiv.addEventListener('click',(event)=>{
 })
 // working on the genirate btn 
 genirateBtn.addEventListener('click',()=>{
+  console.log(ImageParameter,"image parametere")
   if(!navigator.onLine){
     errorMsgFunc('please check the internet')
     return
   }
   if(checkParametersFunc()){
-    return;
+    console.log('hello world')
+    // return
   }else{
     generate()
   }
