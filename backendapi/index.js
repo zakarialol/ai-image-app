@@ -4,6 +4,7 @@ import "dotenv/config";
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"))
 
 const ACCOUNT_ID = process.env.WORKERS_account_id;
 const API_TOKEN = process.env.WORKERS_AI_TOKEN
