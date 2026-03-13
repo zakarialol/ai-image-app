@@ -93,7 +93,7 @@ function HtmlFunc(arr){
         divSettingHolder.innerHTML += p
             return
         }
-        let p = `<p  class="p-2 hover:bg-secondClr text-white capitalize text-xs cursor-pointer dark:text-firstClr dark:bg-white" data-paramiter = ${element.parametre} data-mode='${element.dataName}'>${element.name}</p>`
+        let p = `<p  class="p-2 hover:bg-secondClr text-white capitalize text-xs cursor-pointer dark:hover:bg-[#e5e5e5] dark:text-black dark:bg-white" data-paramiter = ${element.parametre} data-mode='${element.dataName}'>${element.name}</p>`
         divSettingHolder.innerHTML += p
     });
     return divSettingHolder
@@ -102,7 +102,6 @@ function HtmlFunc(arr){
 function genirateFunc(){
     let numberOfImg = Number(imageSettingArr[1]?.slice(0,1))
     if (!numberOfImg) numberOfImg = 1;
-    console.log(numberOfImg,"number of img")
     let genratedHtml = geniaretHtmlForimgFunc(numberOfImg)
     imgHolderDiv.innerHTML = genratedHtml
 }
