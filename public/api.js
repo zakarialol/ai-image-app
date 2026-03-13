@@ -4,7 +4,7 @@ import { genirateBtn } from "./main.js";
 export async function generate() {
   genirateBtn.disabled = true
   try{
-    const res = await fetch("http://localhost:3000/generate-image", {
+    const res = await fetch("/generate-image", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
