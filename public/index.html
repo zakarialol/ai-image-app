@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+            if(localStorage.getItem("currentTheme")){
+                document.documentElement.classList.add('dark')
+            }
+    </script>
     <link rel="stylesheet" href="../build/style.css">
     <title>image genirater</title>
 </head>
@@ -22,9 +27,9 @@
                 <p class="text-lg font-bold capitalize text-firstClr dark:text-white">ai image generater</p>
             </div>
             <!-- second part -->
-            <button data-btn="theme-mode" class="flex items-center w-8 text-white rounded-full bg-secondClr">
+            <div data-btn="theme-mode" class="flex items-center w-8 text-white rounded-full bg-secondClr">
                     <!-- light mode  -->
-                    <div data-div="svg-div" class="relative hidden w-full p-1 group">
+                    <button id="lightmodeBtn" data-btn="svg-btn" class="relative hidden w-full p-1 group">
                          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                              <g clip-path="url(#a)" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10">
                                  <path d="M5 12H1M23 12h-4M7.05 7.05 4.222 4.222M19.778 19.778 16.95 16.95M7.05 16.95l-2.828 2.828M19.778 4.222 16.95 7.05" stroke-linecap="round"/>
@@ -39,14 +44,14 @@
                                 </defs>      
                             </svg>
                         <p class="absolute right-0 top-full text-nowrap text-[9px] space-x-1 tracking-[1px] hidden transition group-hover:block">light mode</p>
-                    </div>
+                    </button>
                     <!-- darkmode -->
-                     <div data-div="svg-div" class="relative w-full p-1 group">
+                     <button data-btn="svg-btn" id="darkmodeBtn"   class="relative w-full p-1 group">
                         <svg viewBox="0 0 48 48" id="a" xmlns="http://www.w3.org/2000/svg"><defs><style>.b{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round; stroke-width:3;}</style></defs><path class="b" d="M31.75,6.479c6.7339,3.8881,10.3177,11.5721,8.969,19.23-1.3496,7.6616-7.3484,13.6604-15.01,15.01-7.6579,1.3487-15.3419-2.2351-19.23-8.969"/><path class="b" d="M32.02,6.75c4.1858,7.2511,2.98,16.4095-2.94,22.33-5.9205,5.92-15.0789,7.1258-22.33,2.94"/><path class="b" d="M10,8v4"/><path class="b" d="M8,10h4"/><path class="b" d="M12,18v3"/><path class="b" d="M10.5,19.5h3"/><path class="b" d="M30.5,14v3"/><path class="b" d="M29,15.5h3"/><path class="b" d="M38.5,5.5v3"/><path class="b" d="M37,7h3"/><path class="b" d="M7.5,41h3"/><path class="b" d="M9,39.5v3"/><path class="b" d="M39.5,36h3"/><path class="b" d="M41,34.5l.02,3"/>
                         </svg>
                         <p class="tracking-[1px] hidden absolute top-full right-0 group transition text-[9px] text-firstClr text-nowrap group-hover:block">dark mode</p>
+                     </button>
                     </div>
-            </button>
         </header>
         <!-- form styling -->
             <div class="relative w-full h-24 overflow-hidden rounded-lg">

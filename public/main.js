@@ -8,8 +8,10 @@ export const genirateBtn = document.querySelector("[data-Btn='genirateBtn']")
 const modalSvgsBtns = document.querySelectorAll("[data-btn='modal-svgs'] svg")
 const countSvgsBtns = document.querySelectorAll("[data-btn='count-svgs'] svg")
 const aspectSvgsBtns = document.querySelectorAll("[data-btn='aspect-svgs'] svg")
-const themeButton = document.querySelector("[data-btn='theme-mode']")
-const themModeSvg = document.querySelectorAll("[data-div='svg-div']")
+// const themeButton = document.querySelector("[data-btn='theme-mode']")
+const themModeSvg = document.querySelectorAll("[data-btn='svg-btn']")
+const darkmodebtn = document.getElementById('darkmodeBtn')
+const lightmodeBtn = document.getElementById('lightmodeBtn')
 import { ImageParameter,imageSettingArr } from "./state.js"
 import { randomQuotefunc , genirateWidthAndHeight ,checkParametersFunc,toggleHiddenSvgsFunc, errorMsgFunc} from "./ui.js"
 import { generate } from "./api.js"
@@ -86,14 +88,27 @@ genirateBtn.addEventListener('click',()=>{
     generate()
   }
 })
-// this for them mode 
-themeButton.addEventListener("click",()=>{
-    document.documentElement.classList.toggle('dark')
-    toggleHiddenSvgsFunc(themModeSvg)
-})
 // ching if the internet exist or no 
+if(localStorage.getItem("currentTheme")){
+    toggleHiddenSvgsFunc(themModeSvg)
+        // document.documentElement.classList.add('dark')
+}
 window.onload = ()=>{
   if(!navigator.onLine){
     errorMsgFunc('please check the internet')
   }
 }
+// dark mode main div 
+darkmodebtn.addEventListener('click',()=>{
+  console.log('you just presst the dark mode')
+  document.documentElement.classList.toggle('dark')
+  localStorage.setItem('currentTheme',"dark")
+  toggleHiddenSvgsFunc(themModeSvg)
+})
+//light mode btn
+lightmodeBtn.addEventListener('click',()=>{
+  console.log('you just presst the light mode')
+  document.documentElement.classList.remove('dark')
+  localStorage.removeItem("currentTheme")
+  toggleHiddenSvgsFunc(themModeSvg)
+})
