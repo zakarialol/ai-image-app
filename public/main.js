@@ -76,14 +76,12 @@ imgsSettingDiv.addEventListener('click',(event)=>{
 })
 // working on the genirate btn 
 genirateBtn.addEventListener('click',()=>{
-  console.log(ImageParameter,"image parametere")
   if(!navigator.onLine){
     errorMsgFunc('please check the internet')
     return
   }
   if(checkParametersFunc()){
-    console.log('hello world')
-    // return
+    return
   }else{
     generate()
   }
@@ -100,14 +98,12 @@ window.onload = ()=>{
 }
 // dark mode main div 
 darkmodebtn.addEventListener('click',()=>{
-  console.log('you just presst the dark mode')
   document.documentElement.classList.toggle('dark')
   localStorage.setItem('currentTheme',"dark")
   toggleHiddenSvgsFunc(themModeSvg)
 })
 //light mode btn
 lightmodeBtn.addEventListener('click',()=>{
-  console.log('you just presst the light mode')
   document.documentElement.classList.remove('dark')
   localStorage.removeItem("currentTheme")
   toggleHiddenSvgsFunc(themModeSvg)

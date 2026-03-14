@@ -1,11 +1,14 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
+import path from "path";
+import { fileURLToPath } from "url";
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"))
-
+// app.use(express.static("public"))
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use(express.static(path.join(__dirname, "../public")));
 const ACCOUNT_ID = process.env.WORKERS_account_id;
 const API_TOKEN = process.env.WORKERS_AI_TOKEN
 const PORT = process.env.PORT || 3000
@@ -39,7 +42,6 @@ app.post("/generate-image", async (req, res) => {
         })
 
       }catch (err) {
-        console.error(err);
         res.status(500).json({ error: "Image generation failed" });
       }
 })

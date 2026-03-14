@@ -14,10 +14,9 @@ export async function generate() {
         width: ImageParameter.width,
         height: ImageParameter.height,
       })
-    });0
+    });
     if(!res.ok){
       errorMsgFunc("something went wrong please try again")
-      // imgHolderDiv.textContent = " "
       throw new Error("something went wrong please try again")
     }
     genirateFunc()
