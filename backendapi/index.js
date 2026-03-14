@@ -10,7 +10,9 @@ app.use(express.json());
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use(express.static(path.join(__dirname, "../public")));
 const ACCOUNT_ID = process.env.WORKERS_account_id;
+console.log(ACCOUNT_ID)
 const API_TOKEN = process.env.WORKERS_AI_TOKEN
+console.log(API_TOKEN)
 const PORT = process.env.PORT || 3000
 console.log("ACCOUNT:", process.env.WORKERS_account_id);
 console.log("TOKEN EXISTS:", !!process.env.WORKERS_AI_TOKEN);
@@ -34,12 +36,17 @@ app.post("/generate-image", async (req, res) => {
           height: height}),
         }
       );
+      if (!response.ok) {
+          const err = await response.text();
+          throw new Error(err);
+      }
         const buffer = await response.arrayBuffer()
         const base64img = Buffer.from(buffer).toString("base64")
         return base64img;
     }))
         res.setHeader("Content-Type","application/json");
         res.json({
+          success: true,
           images: images
         })
 

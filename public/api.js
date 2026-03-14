@@ -22,7 +22,7 @@ export async function generate() {
     genirateFunc()
     const data = await res.json()
     if (!data.success || !data.images || !data.images.length) {
-      errorMsgFunc("something went wrong please try again")
+      errorMsgFunc("try again something went wrong")
       throw new Error("Image generation failed on server");
     }
     genirateHtmlForImgsFunc(data)
