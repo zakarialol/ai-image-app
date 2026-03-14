@@ -21,6 +21,9 @@ export async function generate() {
     }
     genirateFunc()
     const data = await res.json()
+    if (!data.success || !data.images || !data.images.length) {
+      throw new Error("Image generation failed on server");
+    }
     genirateHtmlForImgsFunc(data)
   }catch(err){
     console.log(err)
