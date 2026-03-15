@@ -35,10 +35,14 @@ const quoteArray = ["A futuristic cyberpunk city at night, neon lights reflectin
      return quoteArray[index++];
  }
 // function to mak ethe typing smoth
+let  interval;
 function typingSmoth(text){
+    if(interval){
+        clearInterval(interval)
+    }
     let i = 0
     textArea.focus()
-    let interval = setInterval(() => {
+    interval = setInterval(() => {
         if(i <= text.length-1){
             textArea.value += text[i++]
         }else{

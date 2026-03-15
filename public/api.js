@@ -1,8 +1,12 @@
+// selecting items 
+const loadingAnimation = document.querySelector('[data-span="loadingAnimate"]')
 import { ImageParameter } from "./state.js";
 import { imgHolderDiv,textArea,errorMsgFunc,genirateFunc } from "./ui.js";
-import { genirateBtn } from "./main.js";
+import { genirateBtn ,genirateText} from "./main.js";
+// function to genirate the images 
 export async function generate() {
   genirateBtn.disabled = true
+  loadingFunc("genirating",false)
   try{
     const res = await fetch("/generate-image", {
       method: "POST",
@@ -30,8 +34,16 @@ export async function generate() {
     console.log(err)
   }finally{
     genirateBtn.disabled = false
+    loadingFunc("genirate",true)
+    
+
   }
   // function to create the elements 
+}
+//functio to remove and add hidden
+function loadingFunc(text,ishidden){
+    genirateText.textContent = `${text}`
+    loadingAnimation.classList.toggle("hidden",ishidden)
 }
 //function to genirate html for imgs 
 function genirateHtmlForImgsFunc(data){

@@ -125,9 +125,17 @@
                     </div>
                 </div>
                 <!-- genirate button -->
-                <button data-Btn="genirateBtn" class="content-center w-full font-sans font-bold text-center text-white capitalize rounded-md bg-secondClr spac">
+                <button data-Btn="genirateBtn" class="flex items-baseline justify-center w-full font-sans font-bold text-center text-black capitalize rounded-md bg-secondClr">
                             <!-- svg place -->
-                            <p class="p-2 text-black dark:text-white" data-Btn="genirateBtn">genirate</p>
+                            <p style="color: currentColor;" class="p-2 dark:text-white" data-Btn="genirateParag">genirate</p>
+
+                            <!-- dot animation close to button  -->
+                        <span data-span="loadingAnimate"  class="flex hidden space-x-1 ">
+                            <span class="w-1 h-1 rounded-full animate-dot1" style="background-color: currentColor;"></span>
+                            <span class="w-1 h-1 rounded-full animate-dot2 " style="background-color: currentColor;"></span>
+
+                            <span class="w-1 h-1 rounded-full animate-dot3 " style="background-color: currentColor;"></span>
+                        </span>
                 </button>
 
         </div>

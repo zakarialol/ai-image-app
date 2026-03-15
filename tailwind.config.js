@@ -18,10 +18,24 @@ module.exports = {
           "50%":{
             opacity:.1
           }
+        },
+        scalesize:{
+          "0%":{
+            transform:"scale(1.5)",
+          },
+          "50%":{
+            transform:"scale(1)",
+          },
+          "100%":{
+            transform :"scale(1.5)"
+          }
         }
       },
       animation:{
-          skelton:'skeltonAnimation 1s ease infinite'
+          skelton:'skeltonAnimation 1s ease infinite',
+          dot1 : "scalesize 2s ease infinite 0s",
+          dot2 : "scalesize 2s ease infinite .3s",
+          dot3 : "scalesize 2s ease infinite .6s",
       }
       
     },
